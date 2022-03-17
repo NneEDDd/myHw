@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>canvas HW</title>
+<script>
+
+const personsData = [
+        {name: "王大衛", salesdata: 60000},
+        {name: "李瑪莉", salesdata: 75000},
+        {name: "陳經理", salesdata: 50000},
+        {name: "田賦爭", salesdata: 65000},
+        
+        {name: "盧廣眾", salesdata: 70000},
+        {name: "理容號", salesdata: 30000},
+        {name: "蔡一林", salesdata: 60000},
+        {name: "周傑輪", salesdata: 50000},
+
+        {name: "涼靜如", salesdata: 65000},
+        {name: "陽澄林", salesdata: 40000},
+        {name: "薛隻千", salesdata: 55000},
+        {name: "晨綺真", salesdata: 60000},
+]
+
+var db;
+var request = indexedDB.open("202109081137", 1);
+/*
+request.onerror = function(event) {
+    alert("資料庫操作發生錯誤!!");
+}
+
+request.onsuccess = function(event) {
+    db = request.result;
+    alert("資料庫開啟成功:" + db);
+}
+*/
+request.onupgradeneeded = function(event) {
+    var mydb = event.target.result;
+    var objectStore = mydb.createObjectStore("persons", {key:"id", autoIncrement:true});
+
+    for (var i in personsData) {
+        objectStore.add(personsData[i]);
+    }
+}
+function drawOnCanvas() {    
+    
+        var canvas = document.getElementById("mycanvas");
+        if (canvas.getContext) {
+            var ctx = canvas.getContext("2d");
+            /* 畫座標軸*/
+                ctx.beginPath();
+                ctx.moveTo(100,100);
+                ctx.lineTo(100,900);
+                ctx.lineTo(900,900);
+
+                ctx.moveTo(100,200);
+                ctx.lineTo(900,200);
+
+                ctx.moveTo(100,300);
+                ctx.lineTo(900,300);
+
+                ctx.moveTo(100,400);
+                ctx.lineTo(900,400);
+
+                ctx.moveTo(100,500);
+                ctx.lineTo(900,500);
+                
+                ctx.moveTo(100,600);
+                ctx.lineTo(900,600);
+
+                ctx.moveTo(100,700);
+                ctx.lineTo(900,700);
+
+                ctx.moveTo(100,800);
+                ctx.lineTo(900,800);
+                ctx.strokeStyle= "#CCDDFF";
+                ctx.lineWidth = 3;
+                ctx.stroke();
+            /* 標註座標軸文字 */
+                ctx.font = "20pt 微軟正黑體";
+                ctx.fillStyle = "#339933";
+                ctx.fillText("銷售額 單位(萬元)", 15, 80);                
+                ctx.fillText("1", 60, 800);
+                ctx.fillText("2", 60, 700);
+                ctx.fillText("3", 60, 600);
+                ctx.fillText("4", 60, 500);
+                ctx.fillText("5", 60, 400);
+                ctx.fillText("6", 60, 300);
+                ctx.fillText("7", 60, 200);
+
+                ctx.fillText("員工", 920, 900);
+                ctx.font = "15pt 微軟正黑體";
+                ctx.fillText("王大衛", 120, 930);
+                ctx.fillText("李瑪莉", 170, 960);
+                ctx.fillText("陳經理", 220, 930);
+                ctx.fillText("田賦爭", 270, 960);
+
+                ctx.fillText("盧廣眾", 320, 930);
+                ctx.fillText("理容號", 370, 960);
+                ctx.fillText("蔡一林", 420, 930);
+                ctx.fillText("周傑輪", 470, 960);
+
+                ctx.fillText("涼靜如", 520, 930);
+                ctx.fillText("陽澄林", 570, 960);
+                ctx.fillText("薛隻千", 620, 930);
+                ctx.fillText("晨綺真", 670, 960);
+                
+                
+            /* 畫資料折線 */
+            var salesDataCords = [[150,300],[200,150],[250,400],[300,250],[350,200],[400,600],
+                                    [450,300],[500,400],[550,250],[600,500],[650,350],[700,300]];
+                ctx.beginPath();
+                for (var i = 0; i < salesDataCords.length; i += 1) {
+                    if (i == 0) {
+                        ctx.moveTo(salesDataCords[0][0], salesDataCords[0][1]);
+                    } else {
+                        ctx.lineTo(salesDataCords[i][0],salesDataCords[i][1]);
+                    }
+                ctx.strokeStyle = "#BE77FF";
+                ctx.lineWidth = 4;
+                ctx.stroke();
+            }
+        }
+
+        var canvas = document.getElementById("mycanvas2");
+        if (canvas.getContext) {
+            var ctx = canvas.getContext("2d");
+            /* 畫座標軸*/
+                ctx.beginPath();
+                ctx.moveTo(100,100);
+                ctx.lineTo(100,900);
+                ctx.lineTo(900,900);
+
+                ctx.moveTo(100,200);
+                ctx.lineTo(900,200);
+
+                ctx.moveTo(100,300);
+                ctx.lineTo(900,300);
+
+                ctx.moveTo(100,400);
+                ctx.lineTo(900,400);
+
+                ctx.moveTo(100,500);
+                ctx.lineTo(900,500);
+                
+                ctx.moveTo(100,600);
+                ctx.lineTo(900,600);
+
+                ctx.moveTo(100,700);
+                ctx.lineTo(900,700);
+
+                ctx.moveTo(100,800);
+                ctx.lineTo(900,800);
+                ctx.strokeStyle= "#CCDDFF";
+                ctx.lineWidth = 3;
+                ctx.stroke();
+            /* 標註座標軸文字 */
+                ctx.font = "20pt 微軟正黑體";
+                ctx.fillStyle = "#339933";
+                ctx.fillText("銷售額 單位(萬元)", 15, 80);                
+                ctx.fillText("1", 60, 800);
+                ctx.fillText("2", 60, 700);
+                ctx.fillText("3", 60, 600);
+                ctx.fillText("4", 60, 500);
+                ctx.fillText("5", 60, 400);
+                ctx.fillText("6", 60, 300);
+                ctx.fillText("7", 60, 200);
+
+                ctx.fillText("員工", 920, 900);
+                ctx.font = "15pt 微軟正黑體";
+                ctx.fillText("王大衛", 120, 930);
+                ctx.fillText("李瑪莉", 170, 960);
+                ctx.fillText("陳經理", 220, 930);
+                ctx.fillText("田賦爭", 270, 960);
+
+                ctx.fillText("盧廣眾", 320, 930);
+                ctx.fillText("理容號", 370, 960);
+                ctx.fillText("蔡一林", 420, 930);
+                ctx.fillText("周傑輪", 470, 960);
+
+                ctx.fillText("涼靜如", 520, 930);
+                ctx.fillText("陽澄林", 570, 960);
+                ctx.fillText("薛隻千", 620, 930);
+                ctx.fillText("晨綺真", 670, 960);
+
+                var salesDataCords = [[150,300],[200,150],[250,400],[300,250],[350,200],[400,600],
+                                    [450,300],[500,400],[550,250],[600,500],[650,350],[700,300]];
+                ctx.beginPath();
+                ctx.fillStyle = "#bbeeef";
+                ctx.fillRect(120,300,30,600);
+                ctx.fillRect(170,150,30,750);
+                ctx.fillRect(220,400,30,500);
+                ctx.fillRect(270,250,30,650);
+
+                ctx.fillRect(320,200,30,700);
+                ctx.fillRect(370,600,30,300);
+                ctx.fillRect(420,300,30,600);
+                ctx.fillRect(470,400,30,500);
+
+                ctx.fillRect(520,250,30,650);
+                ctx.fillRect(570,500,30,400);
+                ctx.fillRect(620,350,30,550);
+                ctx.fillRect(670,300,30,600);
+                }
+
+        var canvas = document.getElementById("mycanvas3");
+        if (canvas.getContext) {
+            var ctx = canvas.getContext("2d");            
+        
+            var data = [6,7.5,5,6.5,7,3,6,5,6.5,4,5.5,6];
+            var name = ["6","7.5","5","6.5","7","3","6","5","6.5","4","5.5","6"];
+            var colors = ["#7E3817", "#C35817", "#EE9A4D", "#A0C544", "#348017", "#307D7E", "#EA0000", "#BF0060", "#8600FF", "#6A6AFF", "#00AEAE", "#FFBB77"];
+            var colors2 = ["#000000"];
+            var center = [500, 500];
+            var radius = 400;
+            var lastPosition = 0, total = 0;
+            
+            for(var i in data) { total += data[i]; }
+            /* 畫圓餅圖 */
+            for (var i = 0; i < data.length; i++) {
+            ctx.fillStyle = colors[i];
+            ctx.beginPath();
+            ctx.moveTo(center[0],center[1]);
+            ctx.arc(center[0],center[1],radius,lastPosition,lastPosition+(Math.PI*2*(data[i]/total)),false);                        
+            ctx.lineTo(center[0],center[1]);
+            ctx.fill();
+            lastPosition += Math.PI*2*(data[i]/total);
+
+            ctx.font = "18pt 新細明體";
+            ctx.fillStyle = "#ffffff";
+            ctx.fillText("王大衛 8.8%", 700, 580);
+            ctx.fillText("李瑪莉 11.0%", 600, 730);
+            ctx.fillText("陳經理 7.3%", 480, 800);
+            ctx.fillText("田賦爭 9.5%", 330, 750);
+
+            ctx.fillText("盧廣眾 10%", 200, 650);
+            ctx.fillText("理容號 4.4%", 160, 530);
+            ctx.fillText("蔡一林 8.8%", 170, 400);
+            ctx.fillText("周傑輪 7.3%", 250, 280);
+
+            ctx.fillText("涼靜如 9.5%", 380, 200);
+            ctx.fillText("陽澄林 5.8%", 550, 220);
+            ctx.fillText("薛隻千 8.0%", 650, 300);
+            ctx.fillText("晨綺真 8.8%", 700, 430);
+
+            }
+            
+
+            }
+
+}
+
+</script>
+</head>
+
+<body onload="drawOnCanvas()">
+    <header><H2>業績統計圖表</H2></header>
+    <main>
+        <article>            
+            <figure>
+                <p>折線圖</p>                
+                <canvas id="mycanvas" width="1000" height="1000" style="border: 3px solid #FF9900"></canvas>
+            </figure>
+        </article>
+        <br><br><br><br>
+        <article>
+            <figure>
+                <p>長條圖</p>
+                <canvas id="mycanvas2" width="1000" height="1000" style="border: 3px solid #000000"></canvas>
+            </figure>
+        </article>
+        <br><br><br><br>
+        <article>
+            <figure>
+                <p>圓餅圖</p>
+                <canvas id="mycanvas3" width="1000" height="1000" style="border: 3px solid #0d3b61"></canvas>
+            </figure>
+        </article>
+        <br><br><br><br>
+    </main>
+    <main>
+        
+    </main>
+
+<p id="displayMsg"></p>
+
+</body>
+
+</html>
