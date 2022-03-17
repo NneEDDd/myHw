@@ -1,0 +1,124 @@
+﻿<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <title>HW02.html</title>
+</head>
+<body>
+
+    <label>姓名:</label>
+    <input type="text" id="idName">
+    <font size="1"><span id="idNMsp"></span></font><br>
+    <font size="1">(1.不可空白 2.至少兩個字以上 3.必須全部為中文字)</font><br>
+
+    <label>密碼:</label>
+    <input type="password" id="idPwd" size="6" /><!-- 瀏覽器執行到此標籤會建立一個物件-->
+    <font size="1"><span id="idPWdsp"></span></font><br>
+    <font size="1">(1.不可空白 2.至少6個字且必須包含英數字、特殊字元[!@#$%^&*])</font><br>
+
+    <label>日期:</label>
+    <!--<input type="date" id="idDate">-->
+    <input type="text" id="idDate">
+    <font size="1"><span id="idDTsp"></span></font><br>
+    <font size="1">(格式:西元年/月/日(yyyy/mm/dd))</font><br>
+
+    <script>
+        document.getElementById("idName").addEventListener("blur", checkName);
+        function checkName() {
+            let theNMObj = document.getElementById("idName");
+            let theNMObjVal = theNMObj.value;
+            let sp = document.getElementById("idNMsp");
+            let theNMObjValLen = theNMObjVal.length;
+            let flag = false;
+           
+            if (theNMObjVal == "")
+            {
+                sp.innerHTML = "請輸入姓名";
+            }
+            else if (theNMObjValLen >= 2)
+            {
+                for (let i = 0; i < theNMObjValLen; i++) {
+                    let ch = theNMObjVal.charCodeAt(i);
+                    if (ch >= 0x4e00 && ch <= 0x9fff) {
+                        flag = true;
+                    }
+                    else {
+                        flag = false;
+                        break;
+                    }
+                }
+                if (flag == true) {
+                    sp.innerHTML = "正確";
+                }
+                else
+                    sp.innerHTML = "輸入錯誤";
+            }
+            else {
+                sp.innerHTML = "太短了!!";
+            }
+        }
+
+        document.getElementById("idPwd").addEventListener("blur", checkPwd);
+        function checkPwd() {
+            //取得idPwd元素
+            let thePwdObj = document.getElementById("idPwd");
+            console.log(thePwdObj);
+            //取得idPwd元素值
+            let thePwdObjVal = thePwdObj.value;
+            console.log(thePwdObjVal);
+            console.log(typeof thePwdObjVal);
+
+            //判斷元素值是否為空白，密碼長度是否大於6
+            //如果長度是否大於6，判斷是否包含字母、數字、特殊符號
+            let sp = document.getElementById("idPWdsp");
+            let thePwdObjValLen = thePwdObjVal.length;
+            let flag1 = false, flag2 = false, flag3 = false;
+
+            if (thePwdObjVal == "")
+                sp.innerHTML = "請輸入密碼";
+            else if (thePwdObjValLen >= 6) {
+                // sp.innerHTML=">=6";
+                for (let i = 0; i < thePwdObjValLen; i++) {
+                    let ch = thePwdObjVal.charAt(i).toUpperCase();
+                    if (ch >= "A" && ch <= "Z")
+                        flag1 = true;
+                    else if (ch >= "0" && ch <= "9")
+                        flag2 = true;
+                    if (flag1 && flag2) break;
+                }
+                if (flag1 && flag2)
+                    sp.innerHTML = "正確";
+                else
+                    sp.innerHTML = "錯誤";
+            }
+            else {
+                sp.innerHTML = "太短了!!";
+            }
+        }
+
+        document.getElementById("idDate").addEventListener("blur", checkDate);
+        function checkDate() {
+            let theDTObj = document.getElementById("idDate");
+            let d = new Date(theDTObj.value);
+            var dd = String(d.getDate()).padStart(2, '0');
+            var mm = String(d.getMonth() + 1).padStart(2, '0');
+            var yyyy = d.getFullYear();
+            date = yyyy + '/' + mm + '/' + dd ;
+            let sp = document.getElementById("idDTsp");
+            if (theDTObj.value == "") {
+                sp.innerHTML = "請輸入日期";
+            }
+            else {
+                if (date == theDTObj.value) {
+                    sp.innerHTML = "ok";
+                }
+                else {
+                    sp.innerHTML = "無此日期";
+                }
+            }
+            
+        }
+
+    </script>
+</body>
+</html>

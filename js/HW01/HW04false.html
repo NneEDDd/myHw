@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HW04.html</title>
+
+    <style>
+        
+    </style>
+
+</head>
+<body>
+
+    <!--<img alt="" src="WinImages/0.gif" /><img alt="" src="WinImages/1.gif" />:<img alt="" src="WinImages/2.gif" /><img alt="" src="WinImages/3.gif" />
+    -->
+    
+    <div style="height:300px">
+        <img alt="" id="pic1" /><img alt="" id="pic2" />
+        <img alt="" id="pic3" /><img alt="" id="pic4" />
+        <img alt="" id="pic0" />
+    </div>
+    <br />
+    <div>
+        <input type="button" id="pre" value="<<" onclick="pre()" />
+        <input type="button" id="play" value="play" onclick="play()" />
+        <input type="button" id="next" value=">>" onclick="next()" />
+    </div>
+    <script>
+        //window.setInterval(setpic, 2000);
+        let index = 0;
+        let Interval = setInterval(function () { index++; setpic();}, 2000);
+        setpic();  //立即執行
+        //document.getElementById("picS1").src = "WinImages/1.gif";
+        //document.getElementById("picS2").src = "WinImages/2.gif";
+
+        
+        function setpic() {
+            let d = new Date();
+            let s = d.getSeconds();
+            //let s1 = parseInt(s / 10);
+            let s1 = s % 5;
+            //if (s1 < 5) {
+            //    document.getElementById("pic1").src = "Singers/" + s1 + ".jpg";
+            //}
+            //else {
+
+            //}
+            document.getElementById("pic1").src = "Singer/" + s1 + ".jpg";
+            //document.getElementById("pic2").src = "Singers/" + s2 + ".jpg";
+            //document.getElementById("pic3").src = "Singers/" + s3 + ".jpg";
+            //document.getElementById("pic4").src = "Singers/" + s4 + ".jpg";
+            //document.getElementById("pic0").src = "Singers/" + s5 + ".jpg";
+            
+        }        
+        function play() {
+            setpic();
+            clearInterval(setpic);
+        }
+        function pre() {
+            console.log("pre");
+            clearInterval(Interval);
+        }
+        function next() {
+            
+            console.log("next");
+            
+            let n1 = index++;
+            if (n1 > 5) {
+                //index = 0
+                n1 = n1 % 5;       
+                document.getElementById("pic1").src = "Singer/" + n1 + ".jpg";
+            }
+            //document.getElementById("pic1").src = "Singer/" + index + ".jpg";            
+            //document.getElementById("next");
+        }
+
+
+
+
+
+
+                //function setclock() {
+                //    //建立日期
+                //    let d = new Date();
+
+                //    //取得秒數，分割為兩位數
+                //    let s = d.getSeconds();
+                //    //alert(s);  //57 57/10=parseInt(5.7)=5,57%10=7
+                //    //let s1 = parseInt(s / 10);  //5
+                //    let s2 = s % 10;  //7
+
+                //    //顯示圖片，對應秒數
+                //    document.getElementById("pic0").src = "Singers/" + s1 + ".jpg";  //ES6以前
+                //    document.getElementById("pic4").src = `Singers/${s2}.jpg`;  //ES6
+                //}
+                //window.setInterval(setclock, 1000);
+                //setclock();
+    </script>
+</body>
+</html>

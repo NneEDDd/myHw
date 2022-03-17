@@ -1,0 +1,147 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HW04.html</title>
+
+    <style>
+        .min {
+            width: 50px;
+            filter: opacity(30%);
+        }
+        .choice {
+            width: 50px;
+            filter: opacity(100%);
+        }
+
+    </style>
+
+</head>
+<body>    
+    <!--<img alt="" src="WinImages/0.gif" /><img alt="" src="WinImages/1.gif" />:<img alt="" src="WinImages/2.gif" /><img alt="" src="WinImages/3.gif" />
+    -->
+
+    <div style="height:300px">
+        <img alt="" id="pic1" onclick="imgclick()" />
+    </div>
+    <br />
+    <div>
+        <img id="no0" class="min" />
+        <img id="no1" class="min" />
+        <img id="no2" class="min" />
+        <img id="no3" class="min" />
+        <img id="no4" class="min" />
+    </div>
+    <div>
+        <input type="button" id="pre" value="<<" onclick="pre()" />
+        <input type="button" id="play" value="play" onclick="play()" />
+        <input type="button" id="next" value=">>" onclick="next()" />
+    </div>
+    <script>
+        //window.setInterval(setpic, 2000);
+        let index = 0;
+        let time = 0;
+        var chk = 0;
+        /*let Interval = setInterval(function () { index++; setpic();}, 2000);
+        setpic();*/
+        //立即執行
+        //document.getElementById("picS1").src = "WinImages/1.gif";
+        //document.getElementById("picS2").src = "WinImages/2.gif";
+        document.getElementById("no0").src = "Singer/0.jpg";
+        document.getElementById("no1").src = "Singer/1.jpg";
+        document.getElementById("no2").src = "Singer/2.jpg";
+        document.getElementById("no3").src = "Singer/3.jpg";
+        document.getElementById("no4").src = "Singer/4.jpg";
+        
+        function imgclick() {
+            switch (index) {
+                case 0:
+                    window.open('https://youtu.be/RtH0BAbUalk');
+                    break;
+                case 1:
+                    window.open('https://youtu.be/pE1_3x8kSng');
+                    break;
+                case 2:
+                    window.open('https://youtu.be/KHqxeKXfWCw');
+                    break;
+                case 3:
+                    window.open('https://youtu.be/Xx7lJt_Pdek');
+                    break;
+                case 4:
+                    window.open('https://youtu.be/ybfWYpYhTQQ');
+                    break;
+            }
+        }
+
+        function cho() {
+            document.getElementById("no" + index).className = "choice";
+        }
+
+        function autoTime() {
+            timer = setInterval(function () {
+                time++;
+                if (time == 4) {
+                    //下一張
+                    next();
+                    cho();
+                }
+                else if (time > 4) {
+                    time = 0;
+                }
+            }, 1000)
+        }
+
+        autoTime();
+
+        function pre() {
+            console.log("pre");
+            index--;
+            if (index < 0) {
+                index = 4
+            }
+            document.getElementById("pic1").src = "Singer/" + index + ".jpg";            
+        }
+
+        function next() {
+            console.log("next");
+            index++;
+            if (index > 4) {
+                index = 0
+            }
+            document.getElementById("pic1").src = "Singer/" + index + ".jpg";
+            cho();
+        }
+        
+        function play() {
+            console.log("play");
+            if (chk == 0) {
+                clearInterval(timer);
+                chk = 1;
+            } else {
+                autoTime();
+                chk = 0;
+            }     
+        }
+
+
+
+
+                //function setclock() {
+                //    //建立日期
+                //    let d = new Date();
+
+                //    //取得秒數，分割為兩位數
+                //    let s = d.getSeconds();
+                //    //alert(s);  //57 57/10=parseInt(5.7)=5,57%10=7
+                //    //let s1 = parseInt(s / 10);  //5
+                //    let s2 = s % 10;  //7
+
+                //    //顯示圖片，對應秒數
+                //    document.getElementById("pic0").src = "Singers/" + s1 + ".jpg";  //ES6以前
+                //    document.getElementById("pic4").src = `Singers/${s2}.jpg`;  //ES6
+                //}
+                //window.setInterval(setclock, 1000);
+                //setclock();
+    </script>
+</body>
+</html>

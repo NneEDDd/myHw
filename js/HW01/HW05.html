@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HW05.html</title>
+</head>
+<body>
+    <label>Year:</label><select id="idSelectYear"></select>
+    <label>Month:</label><select id="idSelectMonth"></select>
+    <label>Day:</label><select id="idSelectDay"></select>
+
+    <script>
+        document.querySelector("#idSelectYear").addEventListener("change", addDate);
+        document.querySelector("#idSelectMonth").addEventListener("change", addDate);
+        document.querySelector("#idSelectDay").addEventListener("change", addDate);
+
+        let yy, mm;
+        function addDate() {
+            yy = document.querySelector("#idSelectYear").value;
+            mm = document.querySelector("#idSelectMonth").value
+            //console.log(yy,mm)
+            let d = new Date(yy, mm, 0);
+            console.log(d);
+        }
+
+        //let d = new Date(2021, 7, 0);  //8月的第0天，就是 7月的最後一天
+        //let d = new Date(yy, mm, 0);
+        //console.log(d);
+        let docFrag = document.createDocumentFragment();
+        for (let i = 2010; i <= 2025; i++) {   //新增年
+            let opt = document.createElement("option");  //<option></option>
+            //opt.setAttribute("value", i);  //<option value="1"></option>
+            //let optTxt = document.createTextNode(i);  //1
+            //opt.appendChild(optTxt);   //<option value="1">1</option>
+            opt.value = i;
+            opt.innerHTML = i;
+            docFrag.appendChild(opt);
+        }
+        document.getElementById('idSelectYear').appendChild(docFrag);
+
+
+        ocFrag = document.createDocumentFragment();
+        for (let i = 1; i <= 12; i++) {   //新增月
+            let opt = document.createElement("option");  //<option></option>
+            //opt.setAttribute("value", i);  //<option value="1"></option>
+            //let optTxt = document.createTextNode(i);  //1
+            //opt.appendChild(optTxt);   //<option value="1">1</option>
+            opt.value = i;
+            opt.innerHTML = i;
+            docFrag.appendChild(opt);
+        }
+        document.getElementById('idSelectMonth').appendChild(docFrag);
+
+        for (let i = 1; i <= 31; i++) {   //新增日
+            let opt = document.createElement("option");  //<option></option>
+            //opt.setAttribute("value", i);  //<option value="1"></option>
+            //let optTxt = document.createTextNode(i);  //1
+            //opt.appendChild(optTxt);   //<option value="1">1</option>
+            opt.value = i;
+            opt.innerHTML = i;
+            docFrag.appendChild(opt);
+        }
+        document.getElementById('idSelectDay').appendChild(docFrag);
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,70 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>HW03.html</title>
+</head>
+<body>
+    <img id="idimg1" class="s" src="Images/star.gif" />
+    <img id="idimg2" class="s" src="Images/star.gif" />
+    <img id="idimg3" class="s" src="Images/star.gif" />
+    <img id="idimg4" class="s" src="Images/star.gif" />
+    <img id="idimg5" class="s" src="Images/star.gif" />
+    <div id="divNo"></div>
+    <div>#重新評分請移動滑鼠</div>
+    <script>
+        //document.getElementById("idimg1").addEventListener("mouseover", mouseover);  //事件繫結，滑鼠滑入
+        //document.getElementById("idimg1").addEventListener("mouseout", mouseout);    //事件繫結，滑鼠滑出
+        //document.getElementById("idimg2").addEventListener("mouseover", mouseover);  //事件繫結，滑鼠滑入
+        //document.getElementById("idimg2").addEventListener("mouseout", mouseout);
+
+        var ch = false;
+        let imgs = document.querySelectorAll("img.s");
+        //console.log(imgs);  //3
+        for (let img of imgs) {
+            img.addEventListener("mouseover", mouseOver);
+            img.addEventListener("mouseout", mouseOut);
+            img.addEventListener("click", Click);
+        }
+
+
+        let divNo = document.querySelector("#divNo");
+
+        function mouseOver() {
+            //console.log(this);
+            //console.log(this.id.charAt(5));
+            ch = false;
+            let no = this.id.charAt(5);
+            for (let i = 0; i < no; i++) {
+                imgs[i].src = "Images/chngstar.gif";
+            }
+            divNo.innerHTML = "評分為..." + no;
+
+        }
+
+        function mouseOut() {
+            //document.getElementById("idimg").src = "Images/star.gif";
+            if (!ch) {
+                let no = this.id.charAt(5);
+                for (let i = 0; i < no; i++) {
+                    imgs[i].src = "Images/star.gif";
+                }
+            }
+            
+            //if (Click == false) {                
+                
+            //}
+            //else {
+            //   
+            //}
+           
+        }
+        
+        function Click() {
+            ch = true;
+            let no = this.id.charAt(5);
+            divNo.innerHTML = "你給" + no + "顆星";
+        }
+    </script>
+</body>
+</html>

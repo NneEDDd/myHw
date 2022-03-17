@@ -1,0 +1,30 @@
+﻿<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta charset="UTF-8">
+    <title>HW01.html</title>
+    <style>
+        table, td {
+            border: 1px dashed darkblue;
+            background-color: cornsilk;
+            color: brown;
+        }
+    </style>
+</head>
+<body>
+    
+    <script>
+        document.write("<table><tr>");
+        for (let i = 2; i < 10; i++) {
+            document.write("<td>");
+            for (let j = 1; j < 10; j++) { 
+                document.write(i + "*" + j + "=" + i * j + "<br>");            
+                //document.write(`${i}*${j}=${i * j}<br>`);
+            }
+            document.write("</td>");
+        }
+        document.write("</tr></table>");
+        
+    </script>
+</body>
+</html>
